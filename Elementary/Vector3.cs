@@ -27,31 +27,33 @@ using System;
 namespace MathLibrary.Elementary
 {
   /// <summary>
-  /// Two-dimensional vector.
+  /// Three-dimensional vector.
   /// </summary>
-  public struct Vector2
+  public struct Vector3
   {
     /// <summary>
     /// Components.
     /// </summary>
-    public double x, y;
+    public double x, y, z;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public Vector2(double x, double y)
+    public Vector3(double x, double y, double z)
     {
       this.x = x;
       this.y = y;
+      this.z = z;
     }
 
     /// <summary>
     /// Opposite operator.
     /// </summary>
-    public static Vector2 operator -(Vector2 v)
+    public static Vector3 operator -(Vector3 v)
     {
       v.y = -v.x;
       v.y = -v.y;
+      v.z = -v.z;
 
       return v;
     }
@@ -59,10 +61,11 @@ namespace MathLibrary.Elementary
     /// <summary>
     /// Addition operator.
     /// </summary>
-    public static Vector2 operator +(Vector2 v1, Vector2 v2)
+    public static Vector3 operator +(Vector3 v1, Vector3 v2)
     {
       v1.x += v2.x;
       v1.y += v2.y;
+      v1.z += v2.z;
 
       return v1;
     }
@@ -70,10 +73,11 @@ namespace MathLibrary.Elementary
     /// <summary>
     /// Subtraction operator.
     /// </summary>
-    public static Vector2 operator -(Vector2 v1, Vector2 v2)
+    public static Vector3 operator -(Vector3 v1, Vector3 v2)
     {
       v1.x -= v2.x;
       v1.y -= v2.y;
+      v1.z -= v2.z;
 
       return v1;
     }
@@ -81,10 +85,11 @@ namespace MathLibrary.Elementary
     /// <summary>
     /// Scalar multiplier operator.
     /// </summary>
-    public static Vector2 operator *(Vector2 v, double scalar)
+    public static Vector3 operator *(Vector3 v, double scalar)
     {
       v.x *= scalar;
       v.y *= scalar;
+      v.z *= scalar;
 
       return v;
     }
@@ -92,10 +97,11 @@ namespace MathLibrary.Elementary
     /// <summary>
     /// Scalar multiplier operator.
     /// </summary>
-    public static Vector2 operator *(double scalar, Vector2 v)
+    public static Vector3 operator *(double scalar, Vector3 v)
     {
       v.x *= scalar;
       v.y *= scalar;
+      v.z *= scalar;
 
       return v;
     }
@@ -103,12 +109,13 @@ namespace MathLibrary.Elementary
     /// <summary>
     /// Scalar divider operator.
     /// </summary>
-    public static Vector2 operator /(Vector2 v, double scalar)
+    public static Vector3 operator /(Vector3 v, double scalar)
     {
       double factor = 1.0 / scalar;
 
       v.x *= factor;
       v.y *= factor;
+      v.z *= factor;
 
       return v;
     }
@@ -118,7 +125,7 @@ namespace MathLibrary.Elementary
     /// </summary>
     public double Length()
     {
-      return Math.Sqrt((x * x) + (y * y));
+      return Math.Sqrt((x * x) + (y * y) + (z * z));
     }
 
     /// <summary>
@@ -126,7 +133,7 @@ namespace MathLibrary.Elementary
     /// </summary>
     public double LengthSquared()
     {
-      return (x * x) + (y * y);
+      return (x * x) + (y * y) + (z * z);
     }
 
     /// <summary>
@@ -134,18 +141,35 @@ namespace MathLibrary.Elementary
     /// </summary>
     public void Normalize()
     {
-      double value = 1.0 / Math.Sqrt((x * x) + (y * y));
+      double value = 1.0 / Math.Sqrt((x * x) + (y * y) + (z * z));
 
       x *= value;
       y *= value;
+      z *= value;
     }
 
     /// <summary>
     /// Dot product.
     /// </summary>
-    public static double Dot(Vector2 v1, Vector2 v2)
+    public static double Dot(Vector3 v1, Vector3 v2)
     {
-      return (v1.x * v2.x) + (v1.y * v2.y);
+      return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+    }
+
+    /// <summary>
+    /// Cross product.
+    /// </summary>
+    public static Vector3 Cross(Vector3 v1, Vector3 v2)
+    {
+      double x = v1.y * v2.z - v2.y * v1.z;
+      double y = -(v1.x * v2.z - v2.x * v1.z);
+      double z = v1.x * v2.y - v2.x * v1.y;
+
+      v1.x = x;
+      v1.y = y;
+      v1.z = z;
+
+      return v1;
     }
   }
 }
