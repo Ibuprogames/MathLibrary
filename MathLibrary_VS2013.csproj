@@ -35,6 +35,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elementary\Matrix4.cs" />
     <Compile Include="Elementary\Vector2.cs" />
     <Compile Include="Elementary\Vector3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
